@@ -14,9 +14,11 @@ class DashboardController extends Controller
     public function index(){
 
         if(auth()->check() && auth()->user()->role == 'admin'){
-            $posts = Post::latest()->get();
+            $posts = Post::latest()->paginate(10);
+        } else{
+            $posts = Post::where('user_id', auth()->id())->latest()->paginate(10);
         }
-        $posts = Post::where('user_id', auth()->id())->latest()->paginate(3);
+
         $categories = Category::all();
         $users = User::all();
         $totalPostsCount = Post::count();

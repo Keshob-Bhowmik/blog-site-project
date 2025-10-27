@@ -44,7 +44,7 @@ class ProfileController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
 
-           
+
             if ($user->image && file_exists(public_path($user->image))) {
                 unlink(public_path($user->image));
             }
@@ -56,7 +56,11 @@ class ProfileController extends Controller
         $user->name = $request->name;
         $user->image = $imagePath;
         $user->save();
-         flash()->success('Profile Updated Successfully');
+        flash()
+            ->option('position', 'bottom-right')  // Position on the screen
+            ->option('timeout', 5000)           // How long to display (milliseconds)
+            ->option('ltr', true)               // Right-to-left support
+            ->success('Profile Updated Successfully!');
         return redirect()->route('profile.index');
     }
 }

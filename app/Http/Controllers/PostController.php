@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Views;
@@ -16,6 +15,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $userId = auth()->id();
+
         if (auth()->user()->role === 'admin') {
             if ($request->has('view') && $request->get('view') === 'my') {
                 $query = Post::where('user_id', $userId);
@@ -25,15 +25,15 @@ class PostController extends Controller
         } else {
             $query = Post::where('user_id', $userId);
         }
+
+        // Apply filters
         if ($request->has('author') && !empty($request->author)) {
             $query->whereHas('user', function ($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->author . '%');
             });
         }
         if ($request->has('category_id') && !empty($request->category_id)) {
-            $query->whereHas('category', function ($q) use ($request) {
-                $q->where('category_id', $request->category_id);
-            });
+            $query->where('category_id', $request->category_id);
         }
         if ($request->has('post_id') && !empty($request->post_id)) {
             $query->where('id', $request->post_id);
@@ -41,28 +41,51 @@ class PostController extends Controller
         if ($request->has('status') && !empty($request->status)) {
             $query->where('status', $request->status);
         }
-        if (auth()->user()->role === 'admin' && (!request('view') || request('view') !== 'my')) {
 
-            $posts = $query->with('user', 'category')
-                ->withCount('views')
-                ->orderBy('views_count', 'desc')
-                ->paginate(10);
+        // Handle sorting
+        $sortBy = $request->get('sort_by', 'created_at');
+        $sortOrder = $request->get('sort_order', 'desc');
+
+        // Always load views count for display
+        $query->withCount('views');
+
+        if ($sortBy === 'views') {
+            // Sort by views count
+            $query->orderBy('views_count', $sortOrder);
         } else {
-
-            $posts = $query->with('user', 'category')
-                ->withCount('views')
-                ->latest()
-                ->paginate(10);
+            // Default sorting by created_at or other fields
+            $query->orderBy($sortBy, $sortOrder);
         }
+
+        // Get paginated results
+        $posts = $query->with('user', 'category')->paginate(10);
+
         $myPostsCount = Post::where('user_id', $userId)->count();
         $totalPostsCount = Post::count();
         $categories = Category::all();
+
         return view('posts.index', compact(
             'posts',
             'myPostsCount',
             'totalPostsCount',
             'categories'
         ));
+    }
+
+    // Add autocomplete method
+    public function autocomplete(Request $request)
+    {
+        $search = $request->get('search', '');
+
+        $users = User::select('id', 'name')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            })
+            ->orderBy('name')
+            ->limit(10)
+            ->get();
+
+        return response()->json($users);
     }
 
     public function create()
@@ -96,7 +119,11 @@ class PostController extends Controller
         $post->status = $request->status;
         $post->save();
 
-        flash()->success('Post Created Successfully');
+        flash()
+            ->option('position', 'bottom-right')
+            ->option('timeout', 5000)
+            ->option('ltr', true)
+            ->success('Post Created Successfully!');
         return redirect()->route('post.index');
     }
 
@@ -118,7 +145,7 @@ class PostController extends Controller
         ]);
 
         $post = Post::findOrFail($id);
-        $imagePath = $post->image; 
+        $imagePath = $post->image;
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -132,6 +159,13 @@ class PostController extends Controller
             $imagePath = 'images/' . $imageName;
         }
 
+        // Handle image removal
+        if ($request->has('remove_image')) {
+            if ($post->image && file_exists(public_path($post->image))) {
+                unlink(public_path($post->image));
+            }
+            $imagePath = null;
+        }
 
         $post->title = $request->title;
         $post->content = $request->content;
@@ -140,9 +174,14 @@ class PostController extends Controller
         $post->status = $request->status;
         $post->save();
 
-        flash()->success('Post Updated Successfully');
+        flash()
+            ->option('position', 'bottom-right')
+            ->option('timeout', 5000)
+            ->option('ltr', true)
+            ->success('Post Updated Successfully!');
         return redirect()->route('post.index');
     }
+
     public function delete($id)
     {
         $post = Post::findorfail($id);
@@ -150,7 +189,11 @@ class PostController extends Controller
             unlink(public_path('images/' . $post->image));
         }
         $post->delete();
-        flash()->success('Post Deleted Successfylly');
+        flash()
+            ->option('position', 'bottom-right')
+            ->option('timeout', 5000)
+            ->option('ltr', true)
+            ->success('Post Deleted Successfully!');
         return redirect()->route('post.index');
     }
 
@@ -164,7 +207,7 @@ class PostController extends Controller
         }
         $posts = $query->with('user', 'category')
             ->latest()
-            ->get();
+            ->paginate(12);
         $categories = Category::all();
         return view('index',  compact(
             'posts',

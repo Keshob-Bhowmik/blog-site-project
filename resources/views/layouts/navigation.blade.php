@@ -6,12 +6,22 @@ if (auth()->check()) {
 ?>
 
 <x-layout>
-    <nav class="bg-white border-gray-200">
+    <nav class="bg-white border-b border-gray-400">
         <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-                <span class="self-center text-2xl font-semibold whitespace-nowrap">Flowbite</span>
-            </a>
+            <!-- Logo section moved more to the left -->
+            <div class="flex items-center">
+                <a href="{{route('index')}}" class="flex items-center space-x-2">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="6" fill="#3B82F6" />
+                        <path d="M8 12C8 11.4477 8.44772 11 9 11H23C23.5523 11 24 11.4477 24 12C24 12.5523 23.5523 13 23 13H9C8.44772 13 8 12.5523 8 12Z" fill="white" />
+                        <path d="M8 16C8 15.4477 8.44772 15 9 15H23C23.5523 15 24 15.4477 24 16C24 16.5523 23.5523 17 23 17H9C8.44772 17 8 16.5523 8 16Z" fill="white" />
+                        <path d="M9 19C8.44772 19 8 19.4477 8 20C8 20.5523 8.44772 21 9 21H17C17.5523 21 18 20.5523 18 20C18 19.4477 17.5523 19 17 19H9Z" fill="white" />
+                        <rect x="8" y="8" width="16" height="14" rx="2" stroke="white" stroke-width="2" />
+                    </svg>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap">BlogSite</span>
+                </a>
+            </div>
+
             @if($isLogin)
             <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                 <div>
@@ -57,7 +67,7 @@ if (auth()->check()) {
                 </button>
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-                
+
             </div>
             @else
             <div>

@@ -6,15 +6,15 @@
 
     <div class="p-4 sm:ml-64">
         <div class="mt-14">
-            <!-- Header -->
+
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-gray-800">Categories Management</h1>
                 <p class="text-gray-600 mt-2">Manage and organize post categories</p>
             </div>
 
-            <!-- Stats and Create Button -->
+
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <!-- Total Categories -->
+
                 <div class="bg-white rounded-lg border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="p-3 rounded-lg bg-blue-100 mr-4">
@@ -24,12 +24,12 @@
                         </div>
                         <div>
                             <p class="text-sm font-medium text-gray-600">Total Categories</p>
-                            <p class="text-2xl font-bold text-gray-800">{{$categories->count()}}</p>
+                            <p class="text-2xl font-bold text-gray-800">{{$totalCount}}</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- Create Category Card -->
+
                 <div class="bg-white rounded-lg border border-gray-200 p-6 md:col-span-3">
                     <div class="flex justify-between items-center">
                         <div>
@@ -43,9 +43,9 @@
                 </div>
             </div>
 
-            <!-- Categories Table -->
+
             <div class="bg-white rounded-lg border border-gray-200">
-                <!-- Table Header -->
+
                 <div class="px-6 py-4 border-b border-gray-200">
                     <div class="flex justify-between items-center">
                         <h2 class="text-xl font-semibold text-gray-800">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <!-- Table -->
+
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead class="bg-gray-50">
@@ -95,22 +95,21 @@
                     </table>
                 </div>
 
-                <!-- Table Footer -->
+                @if($categories->count() > 0)
                 <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
                     <div class="flex justify-between items-center">
                         <div class="text-sm text-gray-500">
-                            Showing 1 to 4 of 15 results
+                            Showing {{ $categories->firstItem() }} to {{ $categories->lastItem() }} of {{ $categories->total() }} results
+
                         </div>
-                        <!-- Pagination -->
-                        <div class="flex space-x-2">
-                            <button class="px-3 py-1 border border-gray-300 rounded-md text-sm text-gray-400 cursor-not-allowed">Previous</button>
-                            <button class="px-3 py-1 border border-gray-300 rounded-md text-sm bg-blue-600 text-white">1</button>
-                            <button class="px-3 py-1 border border-gray-300 rounded-md text-sm">2</button>
-                            <button class="px-3 py-1 border border-gray-300 rounded-md text-sm">3</button>
-                            <button class="px-3 py-1 border border-gray-300 rounded-md text-sm">Next</button>
+
+
+                        <div class="flex items-center space-x-2">
+                            {{ $categories->appends(request()->query())->links() }}
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

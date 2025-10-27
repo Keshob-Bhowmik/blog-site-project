@@ -6,22 +6,22 @@
 
     <div class="p-20 sm:ml-64">
         <div class="flex">
-            <!-- Main Content -->
+           
             <div class="flex-1 p-8">
                 <div class="max-w-md mx-auto">
-                    <!-- Header -->
+
                     <div class="text-center mb-8">
                         <h1 class="text-3xl font-bold text-gray-800">Edit Profile</h1>
                         <p class="text-gray-600 mt-2">Update your profile information</p>
                     </div>
 
-                    <!-- Edit Profile Form -->
+
                     <div class="bg-white rounded-lg shadow-md overflow-hidden">
                         <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 
-                            <!-- Profile Header with Avatar -->
+
                             <div class="bg-blue-500 h-32 relative">
                                 <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2">
                                     <div class="relative">
@@ -45,9 +45,9 @@
                                 </div>
                             </div>
 
-                            <!-- Form Content -->
+
                             <div class="pt-16 px-8 pb-8">
-                                <!-- Name Field -->
+
                                 <div class="space-y-2">
                                     <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
                                     <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
@@ -58,7 +58,7 @@
                                     @enderror
                                 </div>
 
-                                <!-- Form Actions -->
+
                                 <div class="flex gap-4 mt-8">
                                     <a href="{{ route('profile.index') }}"
                                        class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition duration-200 text-center">

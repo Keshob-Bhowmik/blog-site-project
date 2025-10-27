@@ -11,18 +11,17 @@
         <div class="flex">
 
 
-            <!-- Main Content -->
+
             <div class="flex-1 p-8">
                 <div class="max-w-4xl mx-auto">
-                    <!-- Header -->
+
                     <div class="text-center mb-8">
                         <h1 class="text-3xl font-bold text-gray-800">My Profile</h1>
                         <p class="text-gray-600 mt-2">View your profile information</p>
                     </div>
 
-                    <!-- Profile Card -->
                     <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                        <!-- Profile Header -->
+
                         <div class="bg-blue-500 h-32 relative">
                             <div class="absolute -bottom-8 left-8">
                                 <div class="w-24 h-24 bg-gray-300 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
@@ -37,9 +36,9 @@
                             </div>
                         </div>
 
-                        <!-- Profile Content -->
+
                         <div class="pt-12 px-8 pb-8">
-                            <!-- User Info and Edit Button -->
+
                             <div class="flex justify-between items-start mb-8">
                                 <div>
                                     <h2 class="text-2xl font-bold text-gray-800">{{$user->name}}</h2>
@@ -55,9 +54,9 @@
                                 </a>
                             </div>
 
-                            <!-- Profile Details -->
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <!-- Personal Information -->
+
                                 <div class="space-y-4">
                                     <h3 class="text-lg font-semibold text-gray-800 border-b pb-2">Personal Information</h3>
 
@@ -82,7 +81,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Additional Information -->
+
                                 <div class="space-y-4">
                                     <h3 class="text-lg font-semibold text-gray-800 border-b pb-2">Additional Information</h3>
 
@@ -109,7 +108,6 @@
                                 </div>
                             </div>
 
-                            <!-- Statistics -->
                             <div class="mt-8 pt-6 border-t border-gray-200">
                                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Account Statistics</h3>
                                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">

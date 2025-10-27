@@ -16,9 +16,15 @@ if (auth()->check()) {
                             <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
                         </svg>
                     </button>
-                    <a href="https://flowbite.com" class="flex ms-2 md:me-24">
-                        <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 me-3" alt="FlowBite Logo" />
-                        <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap">Flowbite</span>
+                    <a href="{{route('index')}}" class="flex items-center space-x-2">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="6" fill="#3B82F6" />
+                            <path d="M8 12C8 11.4477 8.44772 11 9 11H23C23.5523 11 24 11.4477 24 12C24 12.5523 23.5523 13 23 13H9C8.44772 13 8 12.5523 8 12Z" fill="white" />
+                            <path d="M8 16C8 15.4477 8.44772 15 9 15H23C23.5523 15 24 15.4477 24 16C24 16.5523 23.5523 17 23 17H9C8.44772 17 8 16.5523 8 16Z" fill="white" />
+                            <path d="M9 19C8.44772 19 8 19.4477 8 20C8 20.5523 8.44772 21 9 21H17C17.5523 21 18 20.5523 18 20C18 19.4477 17.5523 19 17 19H9Z" fill="white" />
+                            <rect x="8" y="8" width="16" height="14" rx="2" stroke="white" stroke-width="2" />
+                        </svg>
+                        <span class="self-center text-2xl font-semibold whitespace-nowrap">BlogSite</span>
                     </a>
                 </div>
                 <div class="flex items-center">
@@ -31,13 +37,13 @@ if (auth()->check()) {
                                 <span class="sr-only">Open user menu</span>
 
                                 <div class="w-12 h-12 bg-gray-300 rounded-full border-4 border-white shadow-lg flex items-center justify-center">
-                                @if(auth()->user()->image)
-                                <img class="w-12 h-12 bg-gray-300 rounded-full" src="{{asset(auth()->user()->image)}}" alt="">
-                                @else
-                                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
-                                    {{ substr(auth()->user()->name, 0, 1) }}
-                                </div>
-                                @endif
+                                    @if(auth()->user()->image)
+                                    <img class="w-12 h-12 bg-gray-300 rounded-full" src="{{asset(auth()->user()->image)}}" alt="">
+                                    @else
+                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">
+                                        {{ substr(auth()->user()->name, 0, 1) }}
+                                    </div>
+                                    @endif
                                 </div>
 
                             </button>

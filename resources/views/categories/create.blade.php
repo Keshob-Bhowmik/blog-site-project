@@ -6,13 +6,13 @@
 
     <div class="p-4 sm:ml-64">
         <div class="mt-14">
-            <!-- Header -->
+           
             <div class="mb-8">
                 <h1 class="text-2xl font-bold text-gray-800">{{isset($category) ? 'Update Category' : 'Create Category'}}</h1>
                 <p class="text-gray-600 mt-2">{{isset($category) ? 'Update category information' : 'Create a new category'}}</p>
             </div>
 
-            <!-- Edit Category Form -->
+
             <div class="max-w-2xl mx-auto">
                 <div class="bg-white rounded-lg border border-gray-200 p-6">
                     <form action="{{ isset($category) ? route('category.update', $category->id) : route('category.store') }}" method="POST">
@@ -23,7 +23,7 @@
                         @method('POST')
                         @endif
 
-                        <!-- Category Name -->
+
                         <div class="mb-4">
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Category Name</label>
                             <input type="text"

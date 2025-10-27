@@ -6,15 +6,15 @@
 
     <div class="p-4 sm:ml-64">
         <div class="mt-14">
-            <!-- Header -->
+
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-gray-800">Users Management</h1>
                 <p class="text-gray-600 mt-2">Manage and view all users</p>
             </div>
 
-            <!-- Stats Cards -->
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <!-- Total Users -->
+
                 <div class="bg-white rounded-lg border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="p-3 rounded-lg bg-blue-100 mr-4">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
 
-                <!-- Admin Users -->
+
                 <div class="bg-white rounded-lg border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="p-3 rounded-lg bg-green-100 mr-4">
@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <!-- Regular Users -->
+
                 <div class="bg-white rounded-lg border border-gray-200 p-6">
                     <div class="flex items-center">
                         <div class="p-3 rounded-lg bg-purple-100 mr-4">
@@ -60,12 +60,12 @@
                 </div>
             </div>
 
-            <!-- Filter Form -->
+
             <form method="GET" action="#" class="bg-gray-50 p-4 rounded-lg mb-6">
                 <h2 class="text-lg font-semibold text-gray-700 mb-4">Filter Users</h2>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <!-- Search Filter -->
+
                     <div>
                         <label for="search" class="block text-sm font-medium text-gray-700 mb-1">Search</label>
                         <input type="text"
@@ -76,7 +76,7 @@
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
 
-                    <!-- Role Filter -->
+
                     <div>
                         <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Role</label>
                         <select id="role"
@@ -103,9 +103,9 @@
                 </div>
             </form>
 
-            <!-- Users Table -->
+
             <div class="bg-white rounded-lg border border-gray-200">
-                <!-- Table Header -->
+
                 <div class="px-6 py-4 border-b border-gray-200">
                     <div class="flex justify-between items-center">
                         <h2 class="text-xl font-semibold text-gray-800">
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <!-- Table -->
+
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead class="bg-gray-50">
@@ -172,9 +172,9 @@
                                         @csrf
                                         @method('DELETE')
                                         <button class="text-red-600 hover:text-red-900"
-                                        onclick="return confirm('Are you sure you want to delete the user:  {{ $user->name }}?')">
-                                        Delete
-                                    </button>
+                                            onclick="return confirm('Are you sure you want to delete the user:  {{ $user->name }}?')">
+                                            Delete
+                                        </button>
                                     </form>
                                 </td>
                             </tr>
@@ -184,15 +184,14 @@
                     </table>
                 </div>
 
-                <!-- Table Footer -->
-                <!-- Table Footer -->
+
                 @if($users->count() > 0)
                 <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
                     <div class="flex justify-between items-center">
                         <div class="text-sm text-gray-500">
                             Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} results
                         </div>
-                        <!-- Pagination -->
+
                         <div class="flex space-x-2">
                             {{ $users->links() }}
                         </div>
